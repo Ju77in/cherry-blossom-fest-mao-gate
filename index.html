@@ -823,19 +823,13 @@
     function loadNotices() {
       var container = document.getElementById('notices-list');
 
-      // 1. Check if the URL is still placeholder
-      if (!SHEET_CSV_URL || SHEET_CSV_URL.includes("https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv")) {
-        console.warn("Google Sheet URL is not set yet.");
-        return;
-      }
-
-      // 2. Prevent local file:// CORS blocks
+      // 1. Prevent local file:// CORS blocks
       if (window.location.protocol === 'file:') {
         container.innerHTML = '<li style="border-left-color:#d9534f;"><time>⚠️</time><div><strong>Local File Security Block</strong><span>Google Sheets cannot load from a desktop folder. View this via your live GitHub Pages link (https://...).</span></div></li>';
         return;
       }
 
-      // 3. Cache-buster: forces browser and Google to fetch fresh data every refresh
+      // 2. Cache-buster: forces fresh data on every refresh
       var freshUrl = SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') >= 0 ? '&' : '?') + '_cb=' + new Date().getTime();
 
       Papa.parse(freshUrl, {
@@ -858,9 +852,16 @@
             var title = (item.title || item.heading || item.notice || '').trim();
             var details = (item.details || item.desc || item.description || '').trim();
 
+            // Handles both "20 Oct" and "Oct 20" cleanly
             var parts = rawDate.split(/\s+/);
             var day = parts[0] || '';
             var month = parts[1] || '';
+
+            if (isNaN(day) && !isNaN(month)) {
+              var temp = day;
+              day = month;
+              month = temp;
+            }
 
             return `
               <li>
