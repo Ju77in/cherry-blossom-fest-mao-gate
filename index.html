@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cherry Blossom Festival 2026 — Mao Gate, Senapati</title>
+  
+  <!-- Typography: Newsreader (Editorial Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fff6f9;
+      --fg: #2a2230;
+      --acc: #2f6b4f;
+      --acc-hover: #23523c;
+      --acc-soft: #eaf3ed;
+      --card: #ffffff;
+      --mut: #6a5a66;
+      --border-light: #f0dbe3;
+      --font: "Newsreader", Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      font-size: 18px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 246, 249, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 50;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .logo svg {
+      width: 24px;
+      height: 24px;
+      fill: #e0558a;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .logo:hover svg {
+      transform: rotate(72deg) scale(1.15);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1.5px;
+      background-color: var(--acc);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--acc);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 64px 0 52px;
+    }
+
+    .dates-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border: 1.5px solid var(--acc);
+      border-radius: 999px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--acc);
+      background: var(--acc-soft);
+    }
+
+    .dates-badge svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      color: var(--mut);
+      font-size: 19px;
+      margin: 0 0 28px;
+      max-width: 48ch;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--acc);
+      color: #ffffff;
+      padding: 13px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 14px rgba(47, 107, 79, 0.2);
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      transition: transform 0.25s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--acc-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(47, 107, 79, 0.28);
+    }
+
+    .btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--acc);
+      border: 1.5px solid var(--acc);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--acc-soft);
+      box-shadow: 0 4px 12px rgba(47, 107, 79, 0.1);
+    }
+
+    /* Arched Art Element */
+    .art {
+      aspect-ratio: 4 / 5;
+      border-radius: 200px 200px 12px 12px;
+      background: linear-gradient(160deg, #f6a6c1 0%, #fde2ec 55%, #a8d5ae 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 32px rgba(224, 85, 138, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .art svg {
+      width: 72px;
+      height: 72px;
+      fill: rgba(47, 107, 79, 0.85);
+      margin-bottom: 12px;
+      animation: floatPetal 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatPetal {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(8deg); }
+    }
+
+    .art span {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .art small {
+      color: var(--mut);
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    /* Section Foundations */
+    section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border-light);
+    }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 36px);
+      margin: 0 0 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--acc);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Notices Section */
+    .notices {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .notices li {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: var(--card);
+      padding: 20px 22px;
+      border-radius: 4px;
+      border-left: 5px solid var(--acc);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .notices li:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .notices time {
+      flex: none;
+      min-width: 60px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--acc);
+      background: var(--acc-soft);
+      padding: 8px 10px;
+      border-radius: 4px;
+      line-height: 1.15;
+    }
+
+    .notices time span {
+      display: block;
+      font-size: 20px;
+    }
+
+    .notices time small {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .notices strong {
+      display: block;
+      font-size: 19px;
+      margin-bottom: 4px;
+    }
+
+    .notices span {
+      color: var(--mut);
+      font-size: 16px;
+    }
+
+    /* Registration Tabs & Google Forms Container */
+    .reg-container {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .reg-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: 1.5px solid transparent;
+      font-family: var(--font);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--mut);
+      cursor: pointer;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn[aria-selected="true"] {
+      background: var(--acc);
+      color: #ffffff;
+      border-color: var(--acc);
+    }
+
+    .tab-btn:hover:not([aria-selected="true"]) {
+      background: var(--acc-soft);
+      color: var(--acc);
+    }
+
+    .form-embed-wrapper {
+      width: 100%;
+      min-height: 540px;
+      position: relative;
+      background: #fafafa;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #ebebeb;
+    }
+
+    .form-embed-wrapper iframe {
+      width: 100%;
+      height: 540px;
+      border: none;
+    }
+
+    .form-help {
+      font-size: 15px;
+      color: var(--mut);
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Gallery & Media Section */
+    .chips {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-family: var(--font);
+      font-size: 15px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--acc);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .chip svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .chip[aria-pressed="true"] {
+      background: var(--acc);
+      color: #ffffff;
+    }
+
+    .chip:hover:not([aria-pressed="true"]) {
+      background: var(--acc-soft);
+      transform: translateY(-1px);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .media-item {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #eee;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .media-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    }
+
+    .media-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-item .caption {
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--card);
+    }
+
+    .video-box {
+      grid-column: span 3;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Venue & Map Section */
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .venue-details p {
+      margin: 0 0 16px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .map-embed {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .map-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      padding: 44px 0 60px;
+      border-top: 2px solid var(--acc);
+      margin-top: 40px;
+      color: var(--mut);
+      font-size: 16px;
+    }
+
+    footer b {
+      color: var(--fg);
+    }
+
+    footer a {
+      color: var(--acc);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 36px; }
+      .art { aspect-ratio: 16 / 9; border-radius: 12px; }
+      .media-grid { grid-template-columns: 1fr; }
+      .video-box { grid-column: span 1; }
+      .map-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="wrap">
+      <nav>
+        <a href="#" class="logo">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2C13 6 15 8 19 8C15 9 13 11 12 15C11 11 9 9 5 8C9 8 11 6 12 2Z"/>
+            <circle cx="12" cy="12" r="2.5" fill="#fff6f9"/>
+          </svg>
+          <span>Cherry Blossom Festival</span>
+        </a>
+        <div class="nav-links">
+          <a href="#notices">Notices</a>
+          <a href="#register">Registration</a>
+          <a href="#gallery">Moments</a>
+          <a href="#location">Venue & Route</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" style="border-top: none;">
+        <div>
+          <div class="dates-badge">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            12 – 15 November 2026 • Mao Gate, Senapati
+          </div>
+          <h1>Cherry Blossom Festival 2026</h1>
+          <p>Celebrate the autumn bloom across the mountain ridges of Mao Gate. Experience indigenous folk music, local culinary banquets, mountain camping, and strolls beneath flowering Himalayan cherry trees.</p>
+          <div class="btn-group">
+            <a class="btn" href="#register" onclick="switchTab('pass')">
+              <span>Get Entry Passes</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a class="btn btn-secondary" href="#register" onclick="switchTab('stall')">
+              Apply for Stalls
+            </a>
+          </div>
+        </div>
+
+        <div class="art" aria-label="Decorative blossom visual">
+          <svg viewBox="0 0 24 24"><path d="M12 3c.7 2.4 2.6 4.3 5 5-2.4.7-4.3 2.6-5 5-.7-2.4-2.6-4.3-5-5 2.4-.7 4.3-2.6 5-5z"/><circle cx="12" cy="12" r="3" fill="#ffffff"/></svg>
+          <span>Mao Gate, Manipur</span>
+          <small>Elevation ~1,780m • NH-2 Border Highway</small>
+        </div>
+      </section>
+
+      <!-- Latest Notices -->
+      <section id="notices">
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          Official Notices
+        </h2>
+        <ul class="notices">
+          <li>
+            <time><span>28</span><small>Oct</small></time>
+            <div>
+              <strong>Commercial & Organic Stall Applications Open</strong>
+              <span>Food courts, indigenous organic produce, and traditional handicraft slots are now open for registration.</span>
+            </div>
+          </li>
+          <li>
+            <time><span>20</span><small>Oct</small></time>
+            <div>
+              <strong>Traffic & Parking Management Advisory</strong>
+              <span>Dedicated parking zones will be activated near the Mao cultural ground. Heavy transit on NH-2 will be routed accordingly.</span>
+            </div>
+          </li>
+          <li>
+            <time><span>15</span><small>Oct</small></time>
+            <div>
+              <strong>Folk Ensemble & Acoustic Stage Registrations</strong>
+              <span>Local singer-songwriters, traditional instrumentalists, and dance troupes can submit stage performance requests.</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Interactive Registrations (Google Forms Integration) -->
+      <section id="register">
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          Festival Registrations
+        </h2>
+        <div class="reg-container">
+          <div class="reg-tabs">
+            <button class="tab-btn" id="tab-pass" aria-selected="true" onclick="switchTab('pass')">🎟️ Visitor Entry Passes & RSVP</button>
+            <button class="tab-btn" id="tab-stall" aria-selected="false" onclick="switchTab('stall')">🎪 Stall & Vendor Application</button>
+          </div>
+
+          <!-- Visitor Registration Form Embed -->
+          <div id="content-pass" class="form-embed-wrapper">
+            <!-- REPLACE src WITH YOUR GOOGLE FORM EMBED URL (Send -> <> Embed HTML) -->
+            <iframe 
+              src="https://docs.google.com/forms/d/e/1FAIpQLScP_DEMO_FORM_ENTRY/viewform?embedded=true"
+              title="Visitor Pass Registration">Loading visitor form…</iframe>
+          </div>
+
+          <!-- Stall Registration Form Embed -->
+          <div id="content-stall" class="form-embed-wrapper" style="display: none;">
+            <!-- REPLACE src WITH YOUR STALL REGISTRATION GOOGLE FORM EMBED URL -->
+            <iframe 
+              src="https://docs.google.com/forms/d/e/1FAIpQLScP_DEMO_FORM_STALLS/viewform?embedded=true" 
+              title="Stall Application Form">Loading vendor form…</iframe>
+          </div>
+
+          <div class="form-help">
+            <span>Experiencing slow form loading on your mobile network?</span>
+            <a id="ext-link" href="https://docs.google.com/forms/" target="_blank" rel="noopener">Open Form in Full Screen &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery / Moments Section -->
+      <section id="gallery">
+        <h2>
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Moments in Bloom
+        </h2>
+        
+        <div class="chips">
+          <button class="chip" aria-pressed="true" onclick="filterMedia('all', this)">
+            <span>All Media</span>
+          </button>
+          <button class="chip" aria-pressed="false" onclick="filterMedia('photo', this)">
+            <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <span>Photos</span>
+          </button>
+          <button class="chip" aria-pressed="false" onclick="filterMedia('video', this)">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>Videos</span>
+          </button>
+        </div>
+
+        <div class="media-grid">
+          <!-- Featured Video: Replace YouTube Embed URL with your own -->
+          <div class="video-box media-card video">
+            <iframe 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
+              title="Festival Highlights Video" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Photos: Replace img src with your image links or Google Drive links -->
+          <div class="media-item media-card photo">
+            <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=600&q=80" alt="Himalayan cherries in bloom">
+            <div class="caption">Himalayan Cherry Trees in Full Bloom</div>
+          </div>
+
+          <div class="media-item media-card photo">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Cultural folk performance">
+            <div class="caption">Traditional Folk Dance & Attire</div>
+          </div>
+
+          <div class="media-item media-card photo">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Local food stalls">
+            <div class="caption">Indigenous Cuisine & Mountain Delicacies</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Venue & Logistics -->
+      <section id="location">
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Venue & Route Guide
+        </h2>
+        <div class="map-grid">
+          <div class="venue-details">
+            <p><strong>Venue Location:</strong> Cultural Ground, Mao Gate, Senapati District, Manipur — 795150.</p>
+            <p><strong>Transit Route:</strong> Located along the Asian Highway 1 / National Highway 2 (NH-2). Easy road access from Kohima (~30 km south) and Senapati Town / Imphal (~105 km north).</p>
+            <p><strong>Visitor Facilities:</strong> Designated parking zones for light passenger vehicles, on-site drinking water stations, eco-friendly food hubs, and clean sanitation blocks.</p>
+          </div>
+          <div class="map-embed">
+            <!-- Google Maps Embed centered on Mao Gate -->
+            <iframe 
+              src="https://maps.google.com/maps?q=Mao%20Gate%20Manipur&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+              title="Map location of Mao Gate, Senapati"
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+        <div>
+          <b>Cherry Blossom Festival Secretariat</b><br>
+          Mao Gate, Senapati District, Manipur — 795150
+        </div>
+        <div>
+          <b>General Helpdesk:</b> hello@cherryblossomfest.in<br>
+          <b>Stall Allotment Desk:</b> stalls@cherryblossomfest.in
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Tab Switching for Forms
+    function switchTab(type) {
+      var passTab = document.getElementById('tab-pass');
+      var stallTab = document.getElementById('tab-stall');
+      var passBox = document.getElementById('content-pass');
+      var stallBox = document.getElementById('content-stall');
+      var extLink = document.getElementById('ext-link');
+
+      if (type === 'pass') {
+        passTab.setAttribute('aria-selected', 'true');
+        stallTab.setAttribute('aria-selected', 'false');
+        passBox.style.display = 'block';
+        stallBox.style.display = 'none';
+        extLink.href = passBox.querySelector('iframe').src.replace('embedded=true', '');
+      } else {
+        passTab.setAttribute('aria-selected', 'false');
+        stallTab.setAttribute('aria-selected', 'true');
+        passBox.style.display = 'none';
+        stallBox.style.display = 'block';
+        extLink.href = stallBox.querySelector('iframe').src.replace('embedded=true', '');
+      }
+    }
+
+    // Media Filter (All, Photos, Videos)
+    function filterMedia(type, btn) {
+      document.querySelectorAll('.chip').forEach(function(c) {
+        c.setAttribute('aria-pressed', 'false');
+      });
+      btn.setAttribute('aria-pressed', 'true');
+
+      document.querySelectorAll('.media-card').forEach(function(card) {
+        if (type === 'all') {
+          card.style.display = 'block';
+        } else if (card.classList.contains(type)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
