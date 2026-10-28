@@ -815,60 +815,65 @@
       });
     }
 
-    // ==========================================
-    // Google Sheets Live Notice Board Connection
-    // ==========================================
-    // Paste your published CSV link inside the quotes below:
-    var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv";
+// ==========================================
+// Google Sheets Live Notice Board Connection
+// ==========================================
+var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv";
 
-    function loadNotices() {
-      // If no link is configured yet, leave the default HTML fallback notices intact
-      if (!SHEET_CSV_URL || SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv") {
+function loadNotices() {
+  if (!SHEET_CSV_URL || SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv") {
+    return;
+  }
+
+  Papa.parse(SHEET_CSV_URL, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: function(header) {
+      // Strips invisible characters, trims whitespace, and converts to lowercase
+      return header.replace(/[\uFEFF\xA0]/g, '').trim().toLowerCase();
+    },
+    complete: function(results) {
+      var notices = results.data;
+      var container = document.getElementById('notices-list');
+
+      if (!notices || notices.length === 0) {
+        container.innerHTML = '<li><div><strong>No active notices</strong><span>Check back soon for updates.</span></div></li>';
         return;
       }
 
-      Papa.parse(SHEET_CSV_URL, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: function(results) {
-          var notices = results.data;
-          var container = document.getElementById('notices-list');
+      container.innerHTML = notices.map(function(item) {
+        // Reads 'date', 'title', 'details' regardless of original capitalization or spaces
+        var rawDate = (item.date || item.day || '').trim();
+        var title = (item.title || item.heading || item.notice || '').trim();
+        var details = (item.details || item.desc || item.description || '').trim();
 
-          if (!notices || notices.length === 0) {
-            container.innerHTML = '<li><div><strong>No active notices</strong><span>Check back soon for festival updates.</span></div></li>';
-            return;
-          }
+        // Split "28 Oct" into day and month
+        var parts = rawDate.split(/\s+/);
+        var day = parts[0] || '';
+        var month = parts[1] || '';
 
-          container.innerHTML = notices.map(function(item) {
-            // Splits dates like "28 Oct" into "28" and "Oct"
-            var parts = (item.Date || '').trim().split(/\s+/);
-            var day = parts[0] || '';
-            var month = parts[1] || '';
-
-            return `
-              <li>
-                <time>
-                  <span>${day}</span>
-                  <small>${month}</small>
-                </time>
-                <div>
-                  <strong>${item.Title || ''}</strong>
-                  <span>${item.Details || ''}</span>
-                </div>
-              </li>
-            `;
-          }).join('');
-        },
-        error: function(err) {
-          console.error("Failed to load Google Sheet notices:", err);
-          // If the network fails, it leaves the default notices visible
-        }
-      });
+        return `
+          <li>
+            <time>
+              <span>${day}</span>
+              <small>${month}</small>
+            </time>
+            <div>
+              <strong>${title}</strong>
+              <span>${details}</span>
+            </div>
+          </li>
+        `;
+      }).join('');
+    },
+    error: function(err) {
+      console.error("CSV loading error:", err);
     }
+  });
+}
 
-    // Run notice loader
-    loadNotices();
+loadNotices();
   </script>
 </body>
 </html>
