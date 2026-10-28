@@ -819,11 +819,11 @@
     // Google Sheets Live Notice Board Connection
     // ==========================================
     // Paste your published CSV link inside the quotes below:
-    var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pubhtml";
+    var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv";
 
     function loadNotices() {
       // If no link is configured yet, leave the default HTML fallback notices intact
-      if (!SHEET_CSV_URL || SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pubhtml") {
+      if (!SHEET_CSV_URL || SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pub?output=csv") {
         return;
       }
 
