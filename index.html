@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
+  <!-- CSV Parser for Google Sheets Integration -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
   <style>
     :root {
       --bg: #fff6f9;
@@ -623,7 +626,8 @@
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           Official Notices
         </h2>
-        <ul class="notices">
+        <ul class="notices" id="notices-list">
+          <!-- Fallback notices displayed if Google Sheet is loading or offline -->
           <li>
             <time><span>28</span><small>Oct</small></time>
             <div>
@@ -662,7 +666,6 @@
 
           <!-- Visitor Registration Form Embed -->
           <div id="content-pass" class="form-embed-wrapper">
-            <!-- REPLACE src WITH YOUR GOOGLE FORM EMBED URL (Send -> <> Embed HTML) -->
             <iframe 
               src="https://docs.google.com/forms/d/e/1FAIpQLScP_DEMO_FORM_ENTRY/viewform?embedded=true"
               title="Visitor Pass Registration">Loading visitor form…</iframe>
@@ -670,7 +673,6 @@
 
           <!-- Stall Registration Form Embed -->
           <div id="content-stall" class="form-embed-wrapper" style="display: none;">
-            <!-- REPLACE src WITH YOUR STALL REGISTRATION GOOGLE FORM EMBED URL -->
             <iframe 
               src="https://docs.google.com/forms/d/e/1FAIpQLScP_DEMO_FORM_STALLS/viewform?embedded=true" 
               title="Stall Application Form">Loading vendor form…</iframe>
@@ -705,7 +707,7 @@
         </div>
 
         <div class="media-grid">
-          <!-- Featured Video: Replace YouTube Embed URL with your own -->
+          <!-- Featured Video -->
           <div class="video-box media-card video">
             <iframe 
               src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
@@ -715,7 +717,7 @@
             </iframe>
           </div>
 
-          <!-- Photos: Replace img src with your image links or Google Drive links -->
+          <!-- Photos -->
           <div class="media-item media-card photo">
             <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=600&q=80" alt="Himalayan cherries in bloom">
             <div class="caption">Himalayan Cherry Trees in Full Bloom</div>
@@ -746,7 +748,6 @@
             <p><strong>Visitor Facilities:</strong> Designated parking zones for light passenger vehicles, on-site drinking water stations, eco-friendly food hubs, and clean sanitation blocks.</p>
           </div>
           <div class="map-embed">
-            <!-- Google Maps Embed centered on Mao Gate -->
             <iframe 
               src="https://maps.google.com/maps?q=Mao%20Gate%20Manipur&t=&z=13&ie=UTF8&iwloc=&output=embed" 
               title="Map location of Mao Gate, Senapati"
@@ -813,6 +814,61 @@
         }
       });
     }
+
+    // ==========================================
+    // Google Sheets Live Notice Board Connection
+    // ==========================================
+    // Paste your published CSV link inside the quotes below:
+    var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0cFVWJOuFmRZ79SsXUC-JhjD7d5jp_zGWcED7PxFIqNZPUDSf6xW_l8uuIdqSWPjtVf1H9XSeJaCa/pubhtml";
+
+    function loadNotices() {
+      // If no link is configured yet, leave the default HTML fallback notices intact
+      if (!SHEET_CSV_URL || SHEET_CSV_URL === "PASTE_YOUR_GOOGLE_SHEET_CSV_URL_HERE") {
+        return;
+      }
+
+      Papa.parse(SHEET_CSV_URL, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          var notices = results.data;
+          var container = document.getElementById('notices-list');
+
+          if (!notices || notices.length === 0) {
+            container.innerHTML = '<li><div><strong>No active notices</strong><span>Check back soon for festival updates.</span></div></li>';
+            return;
+          }
+
+          container.innerHTML = notices.map(function(item) {
+            // Splits dates like "28 Oct" into "28" and "Oct"
+            var parts = (item.Date || '').trim().split(/\s+/);
+            var day = parts[0] || '';
+            var month = parts[1] || '';
+
+            return `
+              <li>
+                <time>
+                  <span>${day}</span>
+                  <small>${month}</small>
+                </time>
+                <div>
+                  <strong>${item.Title || ''}</strong>
+                  <span>${item.Details || ''}</span>
+                </div>
+              </li>
+            `;
+          }).join('');
+        },
+        error: function(err) {
+          console.error("Failed to load Google Sheet notices:", err);
+          // If the network fails, it leaves the default notices visible
+        }
+      });
+    }
+
+    // Run notice loader
+    loadNotices();
   </script>
 </body>
 </html>
